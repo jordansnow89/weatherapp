@@ -11,8 +11,8 @@ module.exports = {
     axios
       .get(url + token)
       .then(results => {
-        res.json(results.data);
-        // console.log(res);
+        res.status(200).json(results.data);
+        console.log(results.data);
       })
       .catch(error => console.log(error));
   }

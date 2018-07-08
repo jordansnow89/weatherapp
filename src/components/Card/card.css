@@ -1,0 +1,7 @@
+.weatherCard {
+  align-self: center;
+  margin-top: 30px;
+  width: 500px;
+  height: 500px;
+  border: 1px solid black;
+}
