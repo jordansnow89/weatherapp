@@ -4,11 +4,20 @@ import "./card.css";
 class Card extends Component {
   render() {
     return (
-      <div className="CardBody">
-        {this.props.city}
-        {this.props.temperature}
-        {this.props.description}
-        {this.props.icon}
+      <div className="cardBody">
+        <div className="weatherCity"> {this.props.city}</div>
+        <div>
+          <div className="currentTemp">{this.props.temperature}°</div>
+          <div className="description">{this.props.description}</div>
+          <div className="icon">
+            <img
+              height="125px"
+              className="weatherIcon"
+              src={`http://openweathermap.org/img/w/${this.props.icon}.png`}
+              alt={null}
+            />
+          </div>
+        </div>
       </div>
     );
   }

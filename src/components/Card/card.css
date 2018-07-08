@@ -1,7 +1,30 @@
-.weatherCard {
+.cardBody {
+  display: flex;
+  flex-direction: column;
   align-self: center;
-  margin-top: 30px;
+  font-size: 30px;
+  margin-top: 50px;
   width: 500px;
   height: 500px;
   border: 1px solid black;
+}
+
+.weatherCity {
+  margin: 10px 0px 0px 5px;
+  font-size: 50px;
+}
+
+.weatherInfo {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  border: 2px solid red;
+}
+.icon {
+  height: 100px;
+  width: 100px;
+}
+.weathericon {
+  background-size: cover;
 }
