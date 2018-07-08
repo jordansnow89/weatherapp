@@ -12,9 +12,7 @@ class Search extends Component {
     super(props);
     this.state = {
       searchInput: "",
-      city: "",
-      temperature: null,
-      icon: "",
+      previous: [],
       loading: false,
       weatherLoaded: false
     };
@@ -24,8 +22,6 @@ class Search extends Component {
     this.setState({
       searchInput: val
     });
-
-    console.log(this.state.searchInput);
   };
 
   //Internal API call for weather data
@@ -41,11 +37,17 @@ class Search extends Component {
         this.setState({
           city: d.name,
           temperature: d.main.temp,
-          weather: d.weather.description,
-          icon: d.weather.icon,
+          weather: d.weather,
           loading: false,
           weatherLoaded: true
         });
+        this.state.weather.map(element => {
+          this.setState({
+            description: element.description,
+            icon: element.icon
+          });
+        });
+        this.state.previous.push(this.state.city);
         console.log(this.state);
       })
       .catch(console.log);
@@ -75,12 +77,11 @@ class Search extends Component {
                 />
               </div>
             )}
-
             {this.state.weatherLoaded && (
               <Card
                 city={this.state.city}
                 temperature={this.state.temperature}
-                weather={this.state.weather}
+                description={this.state.description}
                 icon={this.state.icon}
               />
             )}
