@@ -4,7 +4,7 @@ import "./search.css";
 //Components
 import Card from "../Card/card";
 //React Imports
-import { CircleLoader, FadeLoader, ClipLoader } from "react-spinners";
+import { ClipLoader } from "react-spinners";
 import axios from "axios";
 
 class Search extends Component {
@@ -12,6 +12,7 @@ class Search extends Component {
     super(props);
     this.state = {
       searchInput: "",
+      description: "",
       previous: [],
       loading: false,
       weatherLoaded: false
@@ -38,12 +39,18 @@ class Search extends Component {
           city: d.name,
           temperature: d.main.temp,
           weather: d.weather,
+          temp_max: d.main.temp_max,
+          temp_min: d.main.temp_min,
+          date: d.dt,
           loading: false,
           weatherLoaded: true
         });
+        //Description is returned in an Array and the string is not capitalized
         this.state.weather.map(element => {
           this.setState({
-            description: element.description,
+            description:
+              element.description.charAt(0).toUpperCase() +
+              element.description.slice(1),
             icon: element.icon
           });
         });
@@ -52,6 +59,10 @@ class Search extends Component {
       })
       .catch(console.log);
   };
+
+  componentDidMount() {
+    console.log(this.state);
+  }
 
   render() {
     return (
@@ -83,8 +94,16 @@ class Search extends Component {
                 temperature={this.state.temperature}
                 description={this.state.description}
                 icon={this.state.icon}
+                temp_max={this.state.temp_max}
+                temp_min={this.state.temp_min}
+                date={this.state.date}
               />
             )}
+          </div>
+          <div className="previousSearchBox">
+            {this.state.previous.map((element, index) => (
+              <div key={index}>{element}</div>
+            ))}
           </div>
         </div>
       </div>

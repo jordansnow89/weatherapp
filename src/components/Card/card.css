@@ -4,27 +4,53 @@
   align-self: center;
   font-size: 30px;
   margin-top: 50px;
-  width: 500px;
-  height: 500px;
+  width: 50%;
+  height: 60%;
   border: 1px solid black;
+  position: relative;
 }
 
 .weatherCity {
+  display: flex;
+  justify-content: center;
   margin: 10px 0px 0px 5px;
   font-size: 50px;
+}
+.tempMinMax {
+  align-self: center;
+  font-size: 15px;
+  padding-left: 10px;
 }
 
 .weatherInfo {
   width: 100%;
-  height: 200px;
+  height: 150px;
   display: flex;
   flex-direction: row;
-  border: 2px solid red;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+  align-content: stretch;
+  /* border: 2px solid red; */
 }
-.icon {
-  height: 100px;
-  width: 100px;
+.iconInfo {
+  /* height: 100%; */
+  /* width: 100%; */
 }
-.weathericon {
-  background-size: cover;
+
+.currentTemp {
+  font-size: 70px;
+  /* align-self: center; */
+}
+
+.description {
+  font-size: 20px;
+}
+
+.prediction {
+  font-size: 15px;
+  align-self: center;
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 5px;
 }
