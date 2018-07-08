@@ -6,13 +6,13 @@ module.exports = {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${
       req.query.search
     }&units=imperial`;
-    let token = `&token=${process.env.WEATHER_API_KEY}`;
+    let token = `&appid=${process.env.WEATHER_API_KEY}`;
 
     axios
       .get(url + token)
       .then(results => {
         res.json(results.data);
-        console.log(res);
+        // console.log(res);
       })
       .catch(error => console.log(error));
   }

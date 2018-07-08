@@ -21,7 +21,7 @@ class Search extends Component {
   handleSearch = event => {
     event.preventDefault();
     axios
-      .get("/api/getWeather")
+      .get(`/api/getWeather?search=${this.state.searchInput}`)
       .then(response => {
         console.log(response.data);
       })
@@ -35,10 +35,10 @@ class Search extends Component {
           Welcome to Weather App! Type a city below to see its 5 day forecast!
         </h2>
         <div className="searchWindow">
-          <form onSubmit={this.handleSearch}>
+          <form className="searchForm" onSubmit={this.handleSearch}>
             <input
               className="searchInput"
-              placeholder="Search by City Here"
+              placeholder="Search by City or Zip Code Here"
               onChange={e => this.handleSearchInput(e.target.value)}
             />
           </form>
