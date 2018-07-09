@@ -13,15 +13,23 @@ class Search extends Component {
     this.state = {
       searchInput: "",
       description: "",
-      previous: [],
       loading: false,
-      weatherLoaded: false
+      weatherLoaded: false,
+      previous: []
     };
   }
 
   handleSearchInput = val => {
     this.setState({
       searchInput: val
+    });
+  };
+
+  savePrevious = (city, temperature, icon) => {
+    let array = [[city, temperature, icon]];
+
+    this.setState({
+      previous: array.concat(this.state.previous)
     });
   };
 
@@ -47,29 +55,34 @@ class Search extends Component {
         });
         //Description is returned in an Array and the string is not capitalized
         this.state.weather.map(element => {
-          this.setState({
+          return this.setState({
             description:
               element.description.charAt(0).toUpperCase() +
               element.description.slice(1),
             icon: element.icon
           });
         });
-        this.state.previous.push(this.state.city);
+        this.savePrevious(
+          this.state.city,
+          this.state.temperature,
+          this.state.icon
+        );
+
         console.log(this.state);
       })
+
       .catch(console.log);
   };
 
-  componentDidMount() {
-    console.log(this.state);
-  }
+  componentDidMount() {}
 
   render() {
     return (
       <div className="searchBody">
-        <h2>
-          Welcome to Weather App! Type a city below to see its 5 day forecast!
-        </h2>
+        <h3>
+          Welcome to Weather App! Type a city or Zipcode below to see its
+          current predicted forecast!
+        </h3>
         <div className="searchWindow">
           <form className="searchForm" onSubmit={this.handleSearch}>
             <input
@@ -88,7 +101,7 @@ class Search extends Component {
                 />
               </div>
             )}
-            {this.state.weatherLoaded && (
+            {this.state.weatherLoaded ? (
               <Card
                 city={this.state.city}
                 temperature={this.state.temperature}
@@ -98,11 +111,22 @@ class Search extends Component {
                 temp_min={this.state.temp_min}
                 date={this.state.date}
               />
-            )}
+            ) : null}
           </div>
-          <div className="previousSearchBox">
+          <div className="previousSearchBody">
             {this.state.previous.map((element, index) => (
-              <div key={index}>{element}</div>
+              <div className="previouslySearched" key={index}>
+                <div className="previousBox">
+                  <div className="previousCity">{element[0]}</div>
+                  <div className="previousTemp">{element[1]}</div>
+                  <img
+                    height="125px"
+                    className="weatherIcon"
+                    src={`http://openweathermap.org/img/w/${element[2]}.png`}
+                    alt=""
+                  />
+                </div>
+              </div>
             ))}
           </div>
         </div>

@@ -4,17 +4,19 @@
   align-self: center;
   font-size: 30px;
   margin-top: 50px;
-  width: 50%;
-  height: 60%;
+  width: 40vw;
+  height: 30vh;
   border: 1px solid black;
+  border-radius: 5px;
   position: relative;
+  font-family: "Roboto", sans-serif;
 }
 
 .weatherCity {
   display: flex;
   justify-content: center;
   margin: 10px 0px 0px 5px;
-  font-size: 50px;
+  font-size: 40px;
 }
 .tempMinMax {
   align-self: center;
@@ -24,7 +26,7 @@
 
 .weatherInfo {
   width: 100%;
-  height: 150px;
+  height: 80%;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -33,14 +35,9 @@
   align-content: stretch;
   /* border: 2px solid red; */
 }
-.iconInfo {
-  /* height: 100%; */
-  /* width: 100%; */
-}
 
 .currentTemp {
-  font-size: 70px;
-  /* align-self: center; */
+  font-size: 60px;
 }
 
 .description {

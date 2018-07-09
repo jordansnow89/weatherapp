@@ -1,30 +1,36 @@
-import React, { Component } from "react";
+import React from "react";
 import "./card.css";
 
-const Card = () => {
+const Card = ({
+  city,
+  temp_max,
+  temp_min,
+  temperature,
+  icon,
+  description,
+  date
+}) => {
   return (
     <div className="cardBody">
       <div className="weatherCity">
-        {" "}
-        {this.props.city}
+        {city}
         <div className="tempMinMax">
-          {" "}
-          {this.props.temp_max}° / {this.props.temp_min}°
+          {temp_max}° / {temp_min}°
         </div>
       </div>
       <div className="weatherInfo">
-        <div className="currentTemp">{this.props.temperature}°</div>
+        <div className="currentTemp">{temperature}°</div>
         <div className="iconInfo">
           <img
             height="125px"
             className="weatherIcon"
-            src={`http://openweathermap.org/img/w/${this.props.icon}.png`}
-            alt={null}
+            src={`http://openweathermap.org/img/w/${icon}.png`}
+            alt=""
           />
         </div>
-        <div className="description">{this.props.description}</div>
+        <div className="description">{description}</div>
       </div>
-      <div className="prediction"> Time of prediction {this.props.date}</div>
+      <div className="prediction"> Time of prediction {date}</div>
     </div>
   );
 };
