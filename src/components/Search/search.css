@@ -37,6 +37,19 @@
   border-bottom: 1px solid grey;
 }
 
+.searchButton {
+  margin-left: 20px;
+  width: 100px;
+  height: 35px;
+  background-color: white;
+  border-radius: 7px;
+}
+
+.searchButton:hover {
+  background-color: #1063fc;
+  color: white;
+}
+
 .weatherBody {
   display: flex;
   flex-direction: column;
@@ -55,6 +68,11 @@
   align-self: center;
   width: 60vw;
   flex-wrap: wrap;
+}
+
+.previousBox {
+  border-left: 1px solid grey;
+  border-bottom: 1px solid grey;
 }
 
 .previousBox {

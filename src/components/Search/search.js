@@ -19,6 +19,26 @@ class Search extends Component {
     };
   }
 
+  // Using locationiq API to use geolocation to pull city and state
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(position => {
+      axios
+        .get(
+          `https://us1.locationiq.org/v1/reverse.php?key=91a4fb428d8243&lat=${
+            position.coords.latitude
+          }&lon=${position.coords.longitude}&format=json`
+        )
+        .then(response => {
+          this.setState({
+            searchInput: `${response.data.address.city}, ${
+              response.data.address.state
+            }`
+          });
+          console.log(response, this.state);
+        });
+    });
+  }
+
   handleSearchInput = val => {
     this.setState({
       searchInput: val
@@ -75,32 +95,12 @@ class Search extends Component {
       .catch(console.log);
   };
 
-  componentDidMount() {
-    //Using locationiq API and geolocationt to pull city and state
-    navigator.geolocation.getCurrentPosition(position => {
-      axios
-        .get(
-          `https://us1.locationiq.org/v1/reverse.php?key=91a4fb428d8243&lat=${
-            position.coords.latitude
-          }&lon=${position.coords.longitude}&format=json`
-        )
-        .then(response => {
-          this.setState({
-            searchInput: `${response.data.address.city}, ${
-              response.data.address.state
-            }`
-          });
-          console.log(response);
-        });
-    });
-  }
-
   render() {
     return (
       <div className="searchBody">
         <h3>
-          Welcome to Weather App! Search a city or Zipcode below to see its
-          current predicted forecast!
+          Welcome to Weather App! Search a city & state or zipcode below to see
+          its current predicted forecast!
         </h3>
         <div className="searchWindow">
           <form className="searchForm" onSubmit={this.handleSearch}>
@@ -108,6 +108,7 @@ class Search extends Component {
               className="searchInput"
               placeholder={this.state.searchInput}
               onChange={e => this.handleSearchInput(e.target.value)}
+              value={this.state.searchInput}
             />
             <button className="searchButton"> Search</button>
           </form>
