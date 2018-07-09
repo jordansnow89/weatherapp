@@ -76,7 +76,7 @@ class Search extends Component {
   };
 
   componentDidMount() {
-    //USING GEOLOCATOIN TO GET USER'S CITY AND STATE
+    //Using locationiq API and geolocationt to pull city and state
     navigator.geolocation.getCurrentPosition(position => {
       axios
         .get(
