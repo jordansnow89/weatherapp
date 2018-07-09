@@ -2,6 +2,7 @@ const axios = require("axios");
 require("dotenv").config();
 
 module.exports = {
+  //external api call
   getWeather: (req, res) => {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${
       req.query.search
