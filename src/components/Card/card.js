@@ -1,5 +1,6 @@
 import React from "react";
 import "./card.css";
+import Timestamp from "react-timestamp";
 
 const Card = ({
   city,
@@ -30,7 +31,9 @@ const Card = ({
         </div>
         <div className="description">{description}</div>
       </div>
-      <div className="prediction"> Time of prediction {date}</div>
+      <div className="prediction">
+        Time of prediction <Timestamp time={date} format="full" includeDay />
+      </div>
     </div>
   );
 };

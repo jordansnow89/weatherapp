@@ -22,3 +22,16 @@
 .secondWord {
   color: #f18100;
 }
+
+.searchButton {
+  margin-left: 20px;
+  width: 100px;
+  height: 35px;
+  background-color: white;
+  border-radius: 7px;
+}
+
+.searchButton:hover {
+  background-color: #1063fc;
+  color: white;
+}

@@ -24,7 +24,7 @@ class Search extends Component {
       searchInput: val
     });
   };
-
+  //Saving previouis searches
   savePrevious = (city, temperature, icon) => {
     let array = [[city, temperature, icon]];
 
@@ -37,7 +37,8 @@ class Search extends Component {
   handleSearch = event => {
     event.preventDefault();
     this.setState({
-      loading: true
+      loading: true,
+      weatherLoaded: false
     });
     axios
       .get(`/api/getWeather?search=${this.state.searchInput}`)
@@ -74,22 +75,41 @@ class Search extends Component {
       .catch(console.log);
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+    //USING GEOLOCATOIN TO GET USER'S CITY AND STATE
+    navigator.geolocation.getCurrentPosition(position => {
+      axios
+        .get(
+          `https://us1.locationiq.org/v1/reverse.php?key=91a4fb428d8243&lat=${
+            position.coords.latitude
+          }&lon=${position.coords.longitude}&format=json`
+        )
+        .then(response => {
+          this.setState({
+            searchInput: `${response.data.address.city}, ${
+              response.data.address.state
+            }`
+          });
+          console.log(response);
+        });
+    });
+  }
 
   render() {
     return (
       <div className="searchBody">
         <h3>
-          Welcome to Weather App! Type a city or Zipcode below to see its
+          Welcome to Weather App! Search a city or Zipcode below to see its
           current predicted forecast!
         </h3>
         <div className="searchWindow">
           <form className="searchForm" onSubmit={this.handleSearch}>
             <input
               className="searchInput"
-              placeholder="Search by City or Zip Code Here"
+              placeholder={this.state.searchInput}
               onChange={e => this.handleSearchInput(e.target.value)}
             />
+            <button className="searchButton"> Search</button>
           </form>
           <div className="weatherBody">
             {this.state.loading && (
@@ -118,7 +138,7 @@ class Search extends Component {
               <div className="previouslySearched" key={index}>
                 <div className="previousBox">
                   <div className="previousCity">{element[0]}</div>
-                  <div className="previousTemp">{element[1]}</div>
+                  <div className="previousTemp">{element[1]}°</div>
                   <img
                     height="125px"
                     className="weatherIcon"

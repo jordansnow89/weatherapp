@@ -54,8 +54,10 @@
   flex-direction: row;
   align-self: center;
   width: 60vw;
+  flex-wrap: wrap;
 }
 
 .previousBox {
   border-left: 1px solid grey;
+  border-bottom: 1px solid grey;
 }
